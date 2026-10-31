@@ -761,3 +761,6 @@ CONFIG_INPUT_AW8697_HAPTIC=y
 
 # Camera
 CONFIG_TECHPACK_CAMERA_XIAOMI_CAS=y
+
+# 关闭通用 ST 触摸驱动（与 thyme 的 fts_521 重复符号）
+# CONFIG_TOUCHSCREEN_ST is not set
