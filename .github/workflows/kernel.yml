@@ -131,6 +131,11 @@ jobs:
           git clone --recursive --depth=1 -j $(nproc) --branch ${{ env.KERNEL_BRANCH }} ${{ env.KERNEL_REPO }} ${{ env.KERNEL_NAME }}
           # tree ${{ env.KERNEL_NAME }}
 
+      - name: 🧩 合入自定义 defconfig
+        working-directory: ${{ env.KERNEL_NAME }}
+        run: |
+          cp ${{ github.workspace }}/Kernel/configs/thyme_lineage_defconfig arch/arm64/configs/thyme_lineage_defconfig
+          echo "已复制 thyme_lineage_defconfig"
       - name: 💫 Get toolchains
         env:
           toolchains: "${{ toJSON(matrix.CONFIG.toolchains) }}"
