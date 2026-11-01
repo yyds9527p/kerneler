@@ -136,6 +136,11 @@ jobs:
         run: |
           cp ${{ github.workspace }}/Kernel/configs/thyme_lineage_defconfig arch/arm64/configs/thyme_lineage_defconfig
           echo "已复制 thyme_lineage_defconfig"
+          # 提交掉改动，避免内核版本串被加上 -dirty（否则 vermagic 与官方模块不匹配）
+          git add -A
+          git -c user.name=ci -c user.email=ci@local commit -qm "ci: add thyme defconfig" || true
+          git status --porcelain | head -5
+          echo "工作区已清理"
       - name: 💫 Get toolchains
         env:
           toolchains: "${{ toJSON(matrix.CONFIG.toolchains) }}"
